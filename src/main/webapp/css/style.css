@@ -1,18 +1,15 @@
-/* ==== Dark Theme with Yellow Highlights for ToyStore ==== */
-
 :root {
-    --primary-yellow: #f9c80e;
-    --yellow-light: #ffe45e;
-    --dark-bg: #121212;
-    --dark-surface: #1f1f1f;
-    --light-text: #f1f1f1;
-    --muted-text: #b0b0b0;
+    --primary-yellow: #123359;
+    --yellow-light: #031f3a;
+    --dark-bg: #ffffff;
+    --dark-surface: #f8f9fa;
+    --light-text: #333333;
+    --muted-text: #666666;
     --radius: 12px;
     --transition: 0.25s ease-in-out;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Base Styles */
 body {
     background-color: var(--dark-bg);
     color: var(--light-text);
@@ -26,7 +23,6 @@ body {
     flex: 1;
 }
 
-/* Navbar */
 .navbar {
     background-color: var(--dark-surface) !important;
     border-bottom: 1px solid #333;
@@ -35,7 +31,7 @@ body {
 .navbar-brand {
     font-weight: bold;
     font-size: 1.6rem;
-    color: var(--primary-yellow) !important;
+    color: #fff !important;
 }
 
 .nav-link {
@@ -46,33 +42,11 @@ body {
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--primary-yellow) !important;
+    color: #fff !important;
+    background-color: rgba(255,255,255,0.15) !important;
     border-radius: var(--radius);
 }
 
-/* Sidebar */
-.list-group-item {
-    background-color: var(--dark-surface);
-    color: var(--muted-text);
-    border: none;
-    margin-bottom: 0.5rem;
-    border-radius: var(--radius);
-    transition: var(--transition);
-}
-
-.list-group-item:hover {
-    background-color: #2b2b2b;
-    color: var(--primary-yellow);
-    transform: translateX(6px);
-}
-
-.list-group-item.active {
-    background: linear-gradient(145deg, #2e2e2e, #1a1a1a);
-    color: var(--primary-yellow);
-    font-weight: 600;
-}
-
-/* Cards */
 .card {
     background-color: var(--dark-surface);
     border: none;
@@ -82,27 +56,13 @@ body {
 }
 
 .card-title {
-    color: var(--primary-yellow);
+    color: #123359;
 }
 
 .card-text {
     color: var(--muted-text);
 }
 
-/* Forms */
-.form-control {
-    background-color: #2a2a2a;
-    color: var(--light-text);
-    border: 1px solid #3a3a3a;
-    border-radius: var(--radius);
-}
-
-.form-control:focus {
-    border-color: var(--primary-yellow);
-    box-shadow: 0 0 0 0.25rem rgba(249, 200, 14, 0.2);
-}
-
-/* Buttons */
 .btn {
     border-radius: var(--radius);
     font-weight: 500;
@@ -110,50 +70,17 @@ body {
 }
 
 .btn-primary {
-    background-color: var(--primary-yellow);
+    background-color: #123359;
     border: none;
-    color: #000;
+    color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: var(--yellow-light);
-    color: #111;
+    background-color: #031f3a;
+    color: #fff;
     transform: translateY(-1px);
 }
 
-/* Alerts */
-.alert {
-    border-radius: var(--radius);
-    font-size: 0.95rem;
-    animation: fadeIn 0.3s ease;
-}
-
-.alert-success {
-    background-color: #233522;
-    color: #b8f5b3;
-}
-
-.alert-danger {
-    background-color: #3b2b2b;
-    color: #ffaaaa;
-}
-
-/* Table */
-.table {
-    color: var(--light-text);
-}
-
-.table th {
-    background-color: #2a2a2a;
-    color: var(--primary-yellow);
-}
-
-.table td {
-    background-color: #1f1f1f;
-    border-top: 1px solid #333;
-}
-
-/* Footer */
 footer {
     background-color: #1a1a1a;
     color: var(--muted-text);
@@ -163,36 +90,109 @@ footer {
     margin-top: auto;
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* === Banner Slideshow === */
+.banner-slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin: 2rem auto;
+    background-color: #ffffff;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #1f1f1f;
-}
-::-webkit-scrollbar-thumb {
-    background: var(--primary-yellow);
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #ffdb4d;
+.banner-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Responsive Fixes */
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 @media (max-width: 768px) {
-    .dashboard-section {
-        padding: 1rem;
+    .banner-slideshow {
+        height: 200px;
+        margin: 1rem auto;
     }
-    .list-group {
-        margin-bottom: 2rem;
+}
+
+/* General Layout */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    flex: 1 0 auto;
+    padding: 20px 0;
+}
+
+footer {
+    flex-shrink: 0;
+    width: 100%;
+}
+
+/* Banner Styles */
+.banner-slideshow {
+    margin-bottom: 2rem;
+}
+
+.banner-slide {
+    position: relative;
+}
+
+.banner-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+}
+
+.banner-content h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.75rem;
+}
+
+.banner-content p {
+    margin-bottom: 0;
+    font-size: 1.1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .banner-content h2 {
+        font-size: 1.5rem;
     }
-    .card-body {
-        padding: 1rem;
+    
+    .banner-content p {
+        font-size: 1rem;
     }
+}
+
+/* === Custom override for navbar active and hover color === */
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+    color: #fff !important;
+    background-color: rgba(255,255,255,0.15) !important;
 }

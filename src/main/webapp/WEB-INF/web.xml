@@ -5,11 +5,16 @@
          version="4.0">
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>admin/dashboard</welcome-file>
     </welcome-file-list>
 
     <!-- Session Configuration -->
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/uploads/*</url-pattern>
+    </servlet-mapping>
 </web-app>
