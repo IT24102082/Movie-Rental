@@ -192,7 +192,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/dashboard">Movie Rental</a>
@@ -220,7 +219,7 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
+
     <div class="content-wrapper">
         <div class="container mt-4">
             <div class="row">
@@ -240,7 +239,6 @@
     <script src="https://cdn.jsdelivr.net/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Initialize all dropdowns
         document.addEventListener('DOMContentLoaded', function() {
             var dropdowns = document.querySelectorAll('.dropdown-toggle');
             dropdowns.forEach(function(dropdown) {
@@ -248,23 +246,21 @@
             });
         });
 
-        // Function to load dashboard data
+
         function loadDashboardData() {
-            // Load total users
+
             fetch('${pageContext.request.contextPath}/api/admin/stats/users')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('totalUsers').textContent = data.total;
                 });
 
-            // Load total products
             fetch('${pageContext.request.contextPath}/api/admin/stats/products')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('totalProducts').textContent = data.total;
                 });
 
-            // Load active rentals
             fetch('${pageContext.request.contextPath}/api/admin/stats/rentals/active')
                 .then(response => response.json())
                 .then(data => {
@@ -272,10 +268,9 @@
                 });
         }
 
-        // Load dashboard data when page loads
+
         document.addEventListener('DOMContentLoaded', loadDashboardData);
 
-        // Refresh dashboard data every 5 minutes
         setInterval(loadDashboardData, 300000);
     </script>
 </body>

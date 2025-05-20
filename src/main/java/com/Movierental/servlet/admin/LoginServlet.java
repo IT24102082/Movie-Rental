@@ -38,7 +38,6 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        // Validate input
         if (username == null || password == null ||
             username.trim().isEmpty() || password.trim().isEmpty()) {
             request.setAttribute("error", "Username and password are required");
@@ -46,7 +45,6 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        // Authenticate user
         User user = userDAO.getUserByUsername(username);
         if (user == null || !userDAO.authenticate(username, password)) {
             request.setAttribute("error", "Invalid username or password");
@@ -54,12 +52,10 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        // Create session and store user
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
         session.setAttribute("role", user instanceof AdminUser ? "ADMIN" : "CUSTOMER");
 
-        // Redirect based on role
         if (user instanceof AdminUser) {
             response.sendRedirect(request.getContextPath() + "/admin/dashboard");
         } else {

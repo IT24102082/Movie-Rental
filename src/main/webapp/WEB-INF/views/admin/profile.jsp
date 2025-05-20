@@ -267,7 +267,6 @@
         </div>
     </div>
 
-    <!-- Delete Account Modal -->
     <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -296,7 +295,6 @@
         function updateProfile(event) {
             event.preventDefault();
 
-            // Validate password fields if attempting to change password
             const currentPassword = document.getElementById('currentPassword').value;
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
@@ -317,7 +315,6 @@
                 email: document.getElementById('email').value
             };
 
-            // Only include password fields if changing password
             if (currentPassword && newPassword) {
                 data.currentPassword = currentPassword;
                 data.newPassword = newPassword;

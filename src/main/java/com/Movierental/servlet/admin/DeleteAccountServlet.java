@@ -34,7 +34,6 @@ public class DeleteAccountServlet extends HttpServlet {
         Map<String, Object> result = new HashMap<>();
 
         try {
-            // Get the current user from session
             HttpSession session = request.getSession();
             User currentUser = (User) session.getAttribute("user");
             
@@ -46,13 +45,11 @@ public class DeleteAccountServlet extends HttpServlet {
                 return;
             }
 
-            // Get password from request
             String password = request.getReader().lines()
                     .reduce("", (accumulator, actual) -> accumulator + actual);
             Map<String, String> requestData = gson.fromJson(password, Map.class);
             password = requestData.get("password");
 
-            // Verify password using user ID
             if (!userDAO.verifyPassword(currentUser.getId(), password)) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 result.put("success", false);
@@ -61,11 +58,9 @@ public class DeleteAccountServlet extends HttpServlet {
                 return;
             }
 
-            // Delete the user using user ID
             boolean deleted = userDAO.deleteUser(currentUser.getId());
             
             if (deleted) {
-                // Invalidate session
                 session.invalidate();
                 result.put("success", true);
                 result.put("message", "Account deleted successfully");

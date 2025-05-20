@@ -49,7 +49,6 @@
 <footer class="py-4 mt-auto">
   <div class="container">
     <div class="row">
-      <!-- Movie Rental Column -->
       <div class="col-md-4 mb-4">
         <h5 class="mb-3">Movie Rental</h5>
         <p class="text-light" style="font-size: 0.9rem;">
@@ -57,7 +56,7 @@
         </p>
       </div>
 
-      <!-- Quick Links Column -->
+
       <div class="col-md-4 mb-4">
         <h5 class="mb-3">Quick Links</h5>
         <ul class="list-unstyled">
@@ -67,7 +66,6 @@
         </ul>
       </div>
 
-      <!-- Contact Us Column -->
       <div class="col-md-4 mb-4">
         <h5 class="mb-3">Contact Us</h5>
         <ul class="list-unstyled">

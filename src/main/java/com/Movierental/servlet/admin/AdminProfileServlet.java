@@ -53,7 +53,6 @@ public class AdminProfileServlet extends HttpServlet {
             return;
         }
 
-        // Parse JSON request body
         StringBuilder buffer = new StringBuilder();
         String line;
         while ((line = request.getReader().readLine()) != null) {
@@ -61,7 +60,6 @@ public class AdminProfileServlet extends HttpServlet {
         }
         Map<String, String> requestData = gson.fromJson(buffer.toString(), Map.class);
 
-        // Update admin profile
         String fullName = requestData.get("fullName");
         String email = requestData.get("email");
         String currentPassword = requestData.get("currentPassword");
@@ -75,7 +73,6 @@ public class AdminProfileServlet extends HttpServlet {
             user.setEmail(email);
         }
 
-        // Handle password change if requested
         if (currentPassword != null && newPassword != null && 
             !currentPassword.trim().isEmpty() && !newPassword.trim().isEmpty()) {
             
@@ -87,9 +84,7 @@ public class AdminProfileServlet extends HttpServlet {
             user.setPassword(newPassword);
         }
 
-        // Save changes
         if (userDAO.updateUser(user)) {
-            // Update session with new user data
             session.setAttribute("user", user);
             
             Map<String, Object> result = new HashMap<>();

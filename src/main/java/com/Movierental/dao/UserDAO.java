@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.text.SimpleDateFormat;
 
 public class UserDAO {
-    private static final String USERS_FILE = System.getProperty("user.dir") + File.separator + "data" + File.separator + "users.txt";
+    private static final String USERS_FILE = "data" + File.separator + "users.txt";
     private Map<String, User> users;
     private static UserDAO instance;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -29,18 +29,17 @@ public class UserDAO {
         File file = new File(USERS_FILE);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
-            // Create default admin user
             AdminUser adminUser = new AdminUser(
                 UUID.randomUUID().toString(),
                 "admin",
                 "admin",
                 "Administrator",
                 "admin@movie.com",
-                "",  // phone
-                "",  // address
+                "",
+                "",
                 "default-avatar.jpg",
-                "IT",  // department
-                "System Administrator"  // title
+                "IT",
+                "System Administrator"
             );
             users.put(adminUser.getId(), adminUser);
             saveUsers();
@@ -89,8 +88,7 @@ public class UserDAO {
             System.out.println("Error reading users file: " + e.getMessage());
             e.printStackTrace();
         }
-        
-        // If no users were loaded, create default admin
+
         if (users.isEmpty()) {
             AdminUser adminUser = new AdminUser(
                 UUID.randomUUID().toString(),
@@ -98,11 +96,11 @@ public class UserDAO {
                 "admin",
                 "Administrator",
                 "admin@movie.com",
-                "",  // phone
-                "",  // address
+                "",
+                "",
                 "default-avatar.jpg",
-                "IT",  // department
-                "System Administrator"  // title
+                "IT",
+                "System Administrator"
             );
             users.put(adminUser.getId(), adminUser);
             saveUsers();
@@ -171,8 +169,25 @@ public class UserDAO {
 
     public boolean deleteUser(String id) {
         if (users.remove(id) != null) {
-            saveUsers();
-            return true;
+            try {
+                // Create a new file to ensure clean write
+                File file = new File(USERS_FILE);
+                if (file.exists()) {
+                    file.delete();
+                }
+                file.createNewFile();
+                
+                // Write remaining users to file
+                try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+                    for (User user : users.values()) {
+                        writer.println(user.toString());
+                    }
+                }
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
         }
         return false;
     }
@@ -226,15 +241,13 @@ public class UserDAO {
                 user.getPhoneNumber(),
                 user.getAddress(),
                 user.getAvatarUrl(),
-                "IT",  // default department
-                "Administrator"  // default title
+                "IT",
+                "Administrator"
             );
         } else {
-            // Do not support non-admin roles, return false
             return false;
         }
 
-        // Replace the old user with the new one
         users.put(userId, newUser);
         saveUsers();
         return true;

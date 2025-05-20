@@ -33,7 +33,6 @@ public class AdminDashboardServlet extends HttpServlet {
             return;
         }
 
-        // Only add user statistics
         request.setAttribute("totalUsers", userDAO.getTotalUserCount());
         
         request.getRequestDispatcher("/WEB-INF/views/admin/dashboard.jsp").forward(request, response);
