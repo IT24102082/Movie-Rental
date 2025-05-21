@@ -177,7 +177,7 @@ public class UserDAO {
                 }
                 file.createNewFile();
                 
-                // Write remaining users to file
+
                 try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
                     for (User user : users.values()) {
                         writer.println(user.toString());
