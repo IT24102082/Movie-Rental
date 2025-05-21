@@ -1,0 +1,9 @@
+0:0:0:0:0:0:0:1 - - [21/May/2025:10:13:19 +0530] "GET /Movie_rental HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [21/May/2025:10:13:19 +0530] "GET /Movie_rental/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [21/May/2025:10:13:20 +0530] "GET /Movie_rental/login HTTP/1.1" 200 9048
+0:0:0:0:0:0:0:1 - - [21/May/2025:10:13:20 +0530] "GET /Movie_rental/css/style.css HTTP/1.1" 404 683
+0:0:0:0:0:0:0:1 - - [21/May/2025:10:13:23 +0530] "POST /Movie_rental/login HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [21/May/2025:10:13:23 +0530] "GET /Movie_rental/admin/dashboard HTTP/1.1" 200 8862
+0:0:0:0:0:0:0:1 - - [21/May/2025:10:13:24 +0530] "GET /Movie_rental/api/admin/stats/users HTTP/1.1" 404 683
+0:0:0:0:0:0:0:1 - - [21/May/2025:10:13:24 +0530] "GET /Movie_rental/api/admin/stats/products HTTP/1.1" 404 683
+0:0:0:0:0:0:0:1 - - [21/May/2025:10:13:24 +0530] "GET /Movie_rental/api/admin/stats/rentals/active HTTP/1.1" 404 683
